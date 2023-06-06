@@ -1,30 +1,25 @@
 function getEmails(bulkResponse){
-    return []
+    return bulkResponse.map(x => x.email)
 }
 
 function getPhoneNumbers(bulkResponse) {
-    return []
+    return bulkResponse.map(x => x.phoneNumber)
 }
 
-function getSecondaryContactIds(bulkResponse) {
-    return []
-}
-
-function getPrimaryId(bulkResponse) {
-    // todo: Logic for getting Primary Ids 
-    return 1
+function getSecondaryContactIds(bulkResponse, id) {
+    return bulkResponse.filter(x => x.id!= id).map(x => x.id)
 }
 
 
 function contactsResponseGenerator(bulkResponse) {
-    const primary_id = getPrimaryId(bulkResponse)
-
+    const bulkSortedResponse = bulkResponse.map(x => x.dataValues).sort((a, b) => a.linkPrecedence.localeCompare(b.linkPrecedence));
+    const primary_key = bulkSortedResponse[0].id
 
     return JSON.stringify({contact : {
-        primaryContatctId : primary_id, 
-        emails: getEmails(bulkResponse), // first element being email of primary contact 
-        phoneNumbers: getPhoneNumbers(bulkResponse), // first element being phoneNumber of primary contact
-        secondaryContactIds: getSecondaryContactIds(bulkResponse), // Array of all Contact IDs that are "secondary" to the primary contact
+        primaryContatctId : primary_key, 
+        emails: getEmails(bulkSortedResponse), // first element being email of primary contact 
+        phoneNumbers: getPhoneNumbers(bulkSortedResponse), // first element being phoneNumber of primary contact
+        secondaryContactIds: getSecondaryContactIds(bulkSortedResponse, primary_key), // Array of all Contact IDs that are "secondary" to the primary contact
     }})
 }
 

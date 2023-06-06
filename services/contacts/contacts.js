@@ -11,28 +11,28 @@ class ContactService {
             { linkedId: id },
         ]
 
-        const out = await contactDao.getOr(orFilter)
-        console.log(out)
-
+        return await contactDao.getOr(orFilter)
     }
 
     async userContactLinkService(email, phoneNumber) {
 
-        const orFilter = [
-            { phoneNumber: phoneNumber },
-            { email: email },
-        ]
+        // const orFilter = [
+        //     { phoneNumber: phoneNumber },
+        //     { email: email },
+        // ]
 
         // const out = await contactDao.getOr(orFilter)
         // console.log(out)
 
-        const out = await contactDao.getOr(orFilter)
+
+        const id = 3 // How to get Root Primary
+        const out = await this.getUserContactsHistory(id)
         if(out.error) {
             response['error'] = out.error
             return response
         }
 
-        return contactsResponseGenerator(out)
+        return contactsResponseGenerator(out.data)
 
         
         // Check if the required Contact is present 
