@@ -37,3 +37,9 @@ syncDatabase();
 app.listen(port, () => {
   console.log(`Server running at port ${port}`)
 })
+
+
+// Things to be done 
+// Add logger 
+// Add error constant 
+// Add constants for variables aswell 

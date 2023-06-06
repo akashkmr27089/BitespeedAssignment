@@ -1,5 +1,5 @@
 const contactValidator = require('../middleware/validator/contacts')
-const contctService = require('../services/contacts')
+const contctService = require('../services/contacts/contacts')
 
 class ContactController {
     async linkUserPurchase(req, res) {
@@ -17,10 +17,12 @@ class ContactController {
         const email = value.email
         const phoneNumber = value.phoneNumber
 
-        contctService.userContactLinkService(email, phoneNumber)
+        const out = await contctService.userContactLinkService(email, phoneNumber)
 
         // Handle success case
-        return res.status(200).json({ message: 'Request body is valid!', recivedData: JSON.stringify(req.body) });
+        return res.status(200).
+                set('Content-Type', 'application/json').
+                send(out);
     }
 }
 
