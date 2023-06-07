@@ -128,7 +128,7 @@ class ContactService {
             // First check if multiple Contact Id 
             if (contactData.data.length > 1) {
                 primaryId = await this.handlemultipleContactData(email, phoneNumber, contactData.data, primaryId)
-            } else if (contactData.data.length == 1) {
+            } else if (contactData.data?.length == 1) {
                 await this.createSecondaryContact(email, phoneNumber, primaryId)
             }
         }
