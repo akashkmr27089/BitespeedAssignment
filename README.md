@@ -12,6 +12,11 @@ curl --location 'localhost/identify' \
 }'
 ```
 
+## To start the program 
+```
+npm start 
+```
+
 ## Important Note: Please add additional .env file at root for running the program 
 ### Sample .env file 
 
