@@ -1,8 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../integration/sequelize');
-
-const primary = 'primary'
-const secondary = 'secondary'
+const {contactVariable} = require('../utils/variable')
 
 const Contacts = sequelize.define('Contacts', {
     id: {
@@ -23,7 +21,7 @@ const Contacts = sequelize.define('Contacts', {
         allowNull: true,
     },
     linkPrecedence: {
-        type: DataTypes.ENUM(primary, secondary),
+        type: DataTypes.ENUM(contactVariable.LINKPRECEDENCE_PRIMARY, contactVariable.LINKPRECEDENCE_SECONDARY),
         allowNull: false,
     },
     // Timestamps
