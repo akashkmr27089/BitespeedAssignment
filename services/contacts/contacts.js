@@ -92,15 +92,19 @@ class ContactService {
     }
 
     async userContactLinkService(email, phoneNumber) {
-        const filter = [
-            { phoneNumber: phoneNumber },
-            { email: email },
-        ]
+
+        let filter = []
+        if(email){
+            filter.push({ "email": email })
+        }
+        if(phoneNumber){
+            filter.push({"phoneNumber": phoneNumber})
+        }
 
         // If same entry exist, then return back the response 
         const contactDataValidaiton = await contactDao.getAnd(filter)
         if (contactDataValidaiton.error) {
-            response['error'] = out.error
+            response['error'] = contactDataValidaiton.error
             return response
         }
 
@@ -112,7 +116,7 @@ class ContactService {
         // else, create a new entry
         const contactData = await contactDao.getOr(filter)
         if (contactData.error) {
-            response['error'] = out.error
+            response['error'] = contactData.error
             return response
         }
 
