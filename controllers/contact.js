@@ -1,5 +1,6 @@
 const contactValidator = require('../middleware/validator/contacts')
 const contctService = require('../services/contacts/contacts')
+const {ERROR_PHONE_NUMBER_EMAIL_MISSING} = require('../utils/errors')
 
 class ContactController {
     async linkUserPurchase(req, res) {
@@ -11,7 +12,7 @@ class ContactController {
 
         const reqBodyKeys = Object.keys(req.body)
         if(!reqBodyKeys.includes('email') && (!reqBodyKeys.includes('phoneNumber'))) {
-            return res.status(400).json({ error: 'should contain either email or phoneNumber' })
+            return res.status(400).json({ error: ERROR_PHONE_NUMBER_EMAIL_MISSING})
         }
 
         const email = value.email
