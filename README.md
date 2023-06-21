@@ -12,12 +12,13 @@ curl --location 'localhost/identify' \
 }'
 ```
 
-## To start the program 
+## To start the program (docker-env)
 ```
-npm start 
+docker-compose up --build
 ```
 
-## Important Note: Please add additional .env file at root for running the program 
+## If running in non-docker env
+### Important Note: Please add additional .env file at root for running the program 
 ### Sample .env file 
 
 ```
